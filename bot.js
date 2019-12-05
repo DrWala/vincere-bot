@@ -45,6 +45,10 @@ class EchoBot extends ActivityHandler {
             console.log(`Processing: ${msg}`);
 
             if(msg.indexOf('@') !== '-1' || msg.substring(0, msg.indexOf('@vincerebot') !== '')) {
+
+                if(!msg.indexOf('@' !== '-1')) {
+                    msg = msg.substring(0, msg.indexOf('@vincerebot'))
+                }
                 let thisResp = allPossibleResponses
                     .map(obj => obj[msg])
                     .filter(obj => obj !== undefined)
