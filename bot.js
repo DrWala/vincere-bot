@@ -44,7 +44,7 @@ class EchoBot extends ActivityHandler {
             let msg = context._activity.text;
             console.log(`Processing: ${msg}`);
 
-            let thisResp  = allPossibleResponses.map(obj => obj[msg]);
+            let thisResp  = allPossibleResponses.map(obj => obj[msg]).filter(obj => obj !== undefined);
             await context.sendActivity(thisResp[Math.floor(Math.random() * thisResp.length)]);
 
             console.log(thisResp);
