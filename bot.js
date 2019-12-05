@@ -44,23 +44,24 @@ class EchoBot extends ActivityHandler {
             let msg = context._activity.text;
             console.log(`Processing: ${msg}`);
 
-            let thisResp = allPossibleResponses
-                .map(obj => obj[msg])
-                .filter(obj => obj !== undefined)
-                .filter(str => str !== "");
-            await context.sendActivity(
-                thisResp[Math.floor(Math.random() * thisResp.length)]
-            );
-
-            console.log(thisResp);
-            if (thisResp[0] === undefined) {
+            if(msg.indexOf('@') !== '-1' || msg.substring(0, msg.indexOf('@vincerebot') !== '')) {
+                let thisResp = allPossibleResponses
+                    .map(obj => obj[msg])
+                    .filter(obj => obj !== undefined)
+                    .filter(str => str !== "");
                 await context.sendActivity(
-                    "Alas! I cannot comprehend the words of a fool."
+                    thisResp[Math.floor(Math.random() * thisResp.length)]
                 );
+    
+                console.log(thisResp);
+                if (thisResp[0] === undefined) {
+                    await context.sendActivity(
+                        "Alas! I cannot comprehend the words of a fool."
+                    );
+                }
+                // By calling next() you ensure that the next BotHandler is run.
+                await next();
             }
-
-            // By calling next() you ensure that the next BotHandler is run.
-            await next();
         });
 
         this.onMembersAdded(async (context, next) => {
