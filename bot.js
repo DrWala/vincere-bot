@@ -44,10 +44,10 @@ class EchoBot extends ActivityHandler {
             let msg = context._activity.text;
             console.log(`Processing: ${msg}`);
 
-            if(msg.indexOf('@') !== '-1' || msg.substring(0, msg.indexOf('@vincerebot') !== '')) {
+            if(msg.indexOf('@') !== '-1' || msg.substring(0, msg.indexOf('@sir_vincere_bot') !== '')) {
 
-                if(!msg.indexOf('@' !== '-1')) {
-                    msg = msg.substring(0, msg.indexOf('@vincerebot'))
+                if(!msg.indexOf('@') !== '-1') {
+                    msg = msg.substring(0, msg.indexOf('@sir_vincere_bot'))
                 }
                 let thisResp = allPossibleResponses
                     .map(obj => obj[msg])
