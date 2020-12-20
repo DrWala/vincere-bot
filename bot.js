@@ -19,7 +19,16 @@ class EchoBot extends ActivityHandler {
                 if (err) {
                     return console.log(err);
                 }
-                command_map = this.formatAirtableResponse(body);
+                for (let index = 0; index < body.records.length; index++) {
+                    const record = body.records[index].fields;
+                    let name = record["Name"];
+                    command_map[name] = [];
+                    for (const [key, value] of Object.entries(record)) {
+                        if (key != "Name") {
+                            command_map[name].push(value);
+                        }
+                    }
+                }
                 console.log("INFO: Data read complete");
                 console.log(command_map);
             }
@@ -35,7 +44,16 @@ class EchoBot extends ActivityHandler {
                     if (err) {
                         return console.log(err);
                     }
-                    command_map = this.formatAirtableResponse(body);
+                    for (let index = 0; index < body.records.length; index++) {
+                        const record = body.records[index].fields;
+                        let name = record["Name"];
+                        command_map[name] = [];
+                        for (const [key, value] of Object.entries(record)) {
+                            if (key != "Name") {
+                                command_map[name].push(value);
+                            }
+                        }
+                    }
                     console.log("INFO: Data read complete");
                     console.log(command_map);
                 }
