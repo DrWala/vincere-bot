@@ -41,6 +41,7 @@ class EchoBot extends ActivityHandler {
         }, 300000);
 
         this.onMessage(async (context, next) => {
+            console.log(context);
             let msg = context._activity.text;
             console.log(`Processing: ${msg}`);
 
@@ -55,8 +56,6 @@ class EchoBot extends ActivityHandler {
                 await context.sendActivity(
                     thisResp[Math.floor(Math.random() * thisResp.length)]
                 );
-
-                console.log(thisResp);
                 if (thisResp[0] === undefined) {
                     await context.sendActivity(
                         "Alas! I cannot comprehend the words of a fool."
