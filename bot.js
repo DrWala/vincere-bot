@@ -41,33 +41,31 @@ class EchoBot extends ActivityHandler {
         }, 300000);
 
         this.onMessage(async (context, next) => {
-            console.log(context);
             let msg = context._activity.text;
-            console.log(`Processing: ${msg}`);
-
-            // Valid messages to allow:
-            // should contain @sir_vincere_bot
-            if (
-                msg.indexOf("@") !== "-1" &&
-                msg.substring(0, msg.indexOf("@sir_vincere_bot")) !== ""
-            ) {
-                msg = msg.substring(0, msg.indexOf("@sir_vincere_bot"));
-                let thisResp = command_map[msg];
-                await context.sendActivity(
-                    thisResp[Math.floor(Math.random() * thisResp.length)]
-                );
-                if (thisResp[0] === undefined) {
+            if (msg != undefined && msg != null) {
+                console.log(`Processing: ${msg}`);
+                if (
+                    msg.indexOf("@") !== "-1" &&
+                    msg.substring(0, msg.indexOf("@sir_vincere_bot")) !== ""
+                ) {
+                    msg = msg.substring(0, msg.indexOf("@sir_vincere_bot"));
+                    let thisResp = command_map[msg];
                     await context.sendActivity(
-                        "Alas! I cannot comprehend the words of a fool."
+                        thisResp[Math.floor(Math.random() * thisResp.length)]
                     );
+                    if (thisResp[0] === undefined) {
+                        await context.sendActivity(
+                            "Alas! I cannot comprehend the words of a fool."
+                        );
+                    }
+                    // By calling next() you ensure that the next BotHandler is run.
+                    await next();
+                } else if (msg == "@sir_vincere_bot") {
+                    await context.sendActivity("Yes you called?");
+                    await next();
+                } else {
+                    await next();
                 }
-                // By calling next() you ensure that the next BotHandler is run.
-                await next();
-            } else if (msg == "@sir_vincere_bot") {
-                await context.sendActivity("Yes you called?");
-                await next();
-            } else {
-                await next();
             }
         });
 
