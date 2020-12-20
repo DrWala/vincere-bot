@@ -21,6 +21,7 @@ class EchoBot extends ActivityHandler {
                 }
                 command_map = this.formatAirtableResponse(body);
                 console.log("INFO: Data read complete");
+                console.log(command_map);
             }
         );
 
@@ -36,6 +37,7 @@ class EchoBot extends ActivityHandler {
                     }
                     command_map = this.formatAirtableResponse(body);
                     console.log("INFO: Data read complete");
+                    console.log(command_map);
                 }
             );
         }, 300000);
